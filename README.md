@@ -9,6 +9,8 @@ page with a [terminaltexteffects](https://github.com/ChrisBuilds/terminaltexteff
 pip install terminaltexteffects
 ```
 
+Binary to follow.....
+
 Requires Python 3.9+.
 
 ## Usage
