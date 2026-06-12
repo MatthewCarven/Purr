@@ -9,7 +9,7 @@ page with a [terminaltexteffects](https://github.com/ChrisBuilds/terminaltexteff
 pip install terminaltexteffects
 ```
 
-Binary to follow.....
+Binary [to follow.....](https://drive.google.com/file/d/1OfA6SuR0EQYFHHdfIp9p33g4BycZ7oi1/view?usp=sharing)
 
 Requires Python 3.9+.
 
