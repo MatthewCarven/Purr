@@ -48,3 +48,17 @@ After each page animates, press any key for the next page, `q` / `Esc` to quit.
   `-f 200` or shrink `-p` if one drags.
 - Good first effects to try: `decrypt`, `matrix`, `beams`, `burn`, `slide`,
   `wipe`, `print`.
+
+## Building purr.exe
+
+Run `build.bat` (installs PyInstaller if needed):
+
+```
+build.bat
+```
+
+Produces a standalone `dist\purr.exe` that takes the same command-line
+parameters and needs no Python install. Note: `--collect-submodules` in the
+script is required because purr loads effect modules dynamically — without it
+the exe would have no effects. First launch is a little slow (one-file exes
+self-extract).
