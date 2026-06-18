@@ -18,10 +18,16 @@ Requires Python 3.9+.
 ```
 python purr.py FILE                random effect per page
 python purr.py FILE -e decrypt     use a named effect
+cat FILE | python purr.py          read piped text from stdin
 python purr.py --list              list all 37 effects
 ```
 
 After each page animates, press any key for the next page, `q` / `Esc` to quit.
+
+Text can come from a file argument or be piped in (`cat FILE | purr`, or
+`git log | purr -e matrix`). Keystrokes for paging are read from the terminal,
+not stdin, so paging still works while stdin carries the piped text. If both a
+file and a pipe are present, the file wins.
 
 ## Keys during an animation
 

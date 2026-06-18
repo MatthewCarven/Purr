@@ -7,6 +7,7 @@ terminaltexteffects effect. Like `more`, but theatrical.
 Usage:
     purr.py FILE                 random effect per page
     purr.py FILE -e decrypt      named effect
+    cat FILE | purr.py           read piped text from stdin
     purr.py --list               show available effects
 
 Requires: pip install terminaltexteffects
@@ -190,22 +191,27 @@ def main():
         print("\n".join(sorted(effects)))
         return
 
-    if not args.file:
-        parser.error("a file is required (or use --list)")
-
     chosen = args.effect.lower()
     if chosen != "random" and chosen not in effects:
         sys.exit(f"purr: unknown effect '{args.effect}'. Available:\n  "
                  + "  ".join(sorted(effects)))
 
-    try:
-        with open(args.file, encoding="utf-8", errors="replace") as f:
-            raw = f.readlines()
-    except OSError as e:
-        sys.exit(f"purr: {e}")
+    # Source the text: a named file, or stdin when piped (cat file | purr).
+    if args.file:
+        try:
+            with open(args.file, encoding="utf-8", errors="replace") as f:
+                raw = f.readlines()
+        except OSError as e:
+            sys.exit(f"purr: {e}")
+        src = args.file
+    elif not sys.stdin.isatty():
+        raw = sys.stdin.readlines()
+        src = "<stdin>"
+    else:
+        parser.error("a file is required (or pipe text in, or use --list)")
 
     if not raw:
-        sys.exit(f"purr: {args.file} is empty")
+        sys.exit(f"purr: {src} is empty")
 
     # Not a terminal (piped/redirected): behave like plain cat.
     if not sys.stdout.isatty():
